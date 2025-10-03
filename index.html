@@ -1,7 +1,13 @@
-<html lang="zh-CN"><head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>孙齐&amp;左雪萍婚宴席位表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>孙齐&左雪萍婚宴席位表</title>
     <style>
         * {
             margin: 0;
@@ -14,9 +20,11 @@
             background: linear-gradient(135deg, #8b0000, #b22222, #d2691e);
             color: #fff;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
             overflow-x: hidden;
             position: relative;
+            touch-action: manipulation;
+            /* 优化触摸行为 */
         }
 
         /* 喜庆装饰元素 */
@@ -27,148 +35,197 @@
         }
 
         .lantern {
-            width: 40px;
-            height: 60px;
+            width: 30px;
+            height: 45px;
             background: linear-gradient(to bottom, #ff0000, #8b0000);
             border-radius: 50%;
             position: absolute;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
             animation: swing 3s ease-in-out infinite;
         }
 
         .lantern::before {
             content: "";
             position: absolute;
-            top: -10px;
-            left: 15px;
+            top: -8px;
+            left: 10px;
             width: 10px;
-            height: 15px;
+            height: 12px;
             background: #ffd700;
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         .lantern::after {
             content: "";
             position: absolute;
-            bottom: -5px;
-            left: 10px;
+            bottom: -4px;
+            left: 5px;
             width: 20px;
-            height: 10px;
+            height: 8px;
             background: #ffd700;
             border-radius: 50%;
         }
 
         .ribbon {
             position: absolute;
-            width: 100px;
-            height: 20px;
+            width: 80px;
+            height: 16px;
             background: linear-gradient(90deg, #ff0000, #ffd700, #ff0000);
             transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 30px;
+            margin-bottom: 20px;
+            padding: 20px 15px;
             background: rgba(139, 0, 0, 0.7);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             border: 2px solid #ffd700;
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
+        /* header::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, #ffd700, #ffa500, #ffd700);
-            /* animation: headerLight 3s linear infinite; */
-        }
+        } */
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            /* text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); */
+            font-size: 1.8rem;
+            margin-bottom: 12px;
             background: linear-gradient(to right, #ffd700, #f50901);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            max-width: 700px;
+            font-size: 0.95rem;
+            max-width: 90%;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #ffd700;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 搜索框样式 - 优化移动端体验 */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #searchInput {
+            padding: 12px 18px;
+            width: 100%;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 0.95rem;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: none;
+            /* 清除iOS默认样式 */
+        }
+
+        #searchButton {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #ff8c00, #ffd700);
+            border: none;
+            border-radius: 0 50px 50px 0;
+            color: #8b0000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: none;
+        }
+
+        #searchButton:active {
+            transform: scale(0.95);
+            /* 移动端点击反馈 */
+        }
+
+        .highlight {
+            background-color: #ffd700;
+            color: #8b0000;
+            font-weight: bold;
+            border-radius: 3px;
+            padding: 0 2px;
         }
 
         .layout {
             display: grid;
-            grid-template-columns: 1fr 220px 1fr;
-            gap: 40px;
-            margin-top: 40px;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 180px auto;
+            gap: 25px;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
         }
 
         .side {
             display: grid;
-            grid-template-columns: 1fr;
-            grid-auto-rows: 1fr;
-            gap: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
             justify-items: center;
         }
 
         .runway {
             background: linear-gradient(to bottom, #8b0000, #b22222, #8b0000);
             position: relative;
-            border-radius: 5px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            border: 3px solid #ffd700;
+            border: 2px solid #ffd700;
+            height: 180px;
         }
 
-        .runway::before {
+        /* .runway::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 20px;
+            height: 16px;
             background: linear-gradient(90deg, #ffd700, #ffa500, #ffd700);
-            /* animation: runwayLight 3s linear infinite; */
             z-index: 2;
-        }
+        } */
 
         .runway::after {
             content: "新婚快乐 百年好合";
             position: absolute;
             color: #ffd700;
-            font-size: 8rem;
+            font-size: 3.6rem;
             font-weight: lighter;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
-            /* transform: rotate(90deg); */
-            letter-spacing: 5px;
-            width: 124px;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.9);
+            letter-spacing: 3px;
+            width: auto;
             font-family: cursive;
+            text-align: center;
+            padding: 0 10px;
         }
 
         .runway-lights {
@@ -183,37 +240,39 @@
 
         .runway-light {
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: rgba(255, 215, 0, 0.5);
             animation: lightPulse 1.5s infinite alternate;
         }
 
         .table-container {
-            perspective: 1000px;
-            width: 240px;
-            height: 240px;
+            perspective: 800px;
+            width: 160px;
+            height: 160px;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 50px 0 100px;
         }
 
         .table {
-            width: 240px;
-            height: 240px;
+            width: 160px;
+            height: 160px;
             background: radial-gradient(circle at center, #b22222, #8b0000);
             border-radius: 50%;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            border: 10px solid #ffd700;
-            transition: transform 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 8px solid #ffd700;
+            transition: transform 0.3s ease;
         }
 
-        .table:hover {
-            transform: translateY(-10px) rotate(5deg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        .table:active {
+            transform: translateY(-8px) rotate(3deg);
+            /* 移动端触摸反馈 */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
         }
 
         .table-number {
@@ -222,45 +281,56 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(255, 215, 0, 0.95);
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             color: #8b0000;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             border: 2px solid #ffa500;
         }
 
         .seat {
             position: absolute;
-            width: 65px;
-            height: 35px;
+            width: 48px;
+            height: 28px;
             background: linear-gradient(to bottom, #b22222, #8b0000);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: #ffd700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 0 5px;
-            border: 2px solid #ffa500;
-            text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+            padding: 0 4px;
+            border: 1.5px solid #ffa500;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+            touch-action: manipulation;
         }
 
-        .seat:hover {
-            transform: scale(1.15);
+        .seat:active {
+            transform: translate(-50%, -50%) scale(1.2);
+            /* 移动端座位点击反馈 */
             background: linear-gradient(to bottom, #ff0000, #b22222);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            color: #fff;
+        }
+
+        /* 座位触摸高亮样式 */
+        .seat-tap {
+            transform: translate(-50%, -50%) scale(1.2);
+            background: linear-gradient(to bottom, #ff0000, #b22222);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
             z-index: 10;
             color: #fff;
         }
@@ -268,25 +338,29 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 15px;
+            margin-top: 25px;
             flex-wrap: wrap;
+            padding: 0 10px;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 12px 22px;
             background: linear-gradient(to right, #ff8c00, #ffd700);
             border: none;
             border-radius: 50px;
             color: #8b0000;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
             position: relative;
             overflow: hidden;
+            -webkit-appearance: none;
+            /* 清除iOS默认按钮样式 */
+            min-width: 100px;
         }
 
         button::before {
@@ -298,12 +372,13 @@
             height: 200%;
             background: rgba(255, 255, 255, 0.1);
             transform: rotate(45deg);
-            transition: all 0.6s ease;
+            transition: all 0.4s ease;
         }
 
-        button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        button:active {
+            transform: translateY(-3px);
+            /* 移动端按钮点击反馈 */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
             background: linear-gradient(to right, #ffd700, #ff8c00);
         }
 
@@ -314,15 +389,14 @@
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 25px;
-            font-size: 1rem;
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 0.9rem;
             background: rgba(139, 0, 0, 0.7);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 2px solid #ffd700;
+            line-height: 1.6;
         }
-
-       
 
         @keyframes lightPulse {
             0% {
@@ -336,71 +410,122 @@
 
         @keyframes swing {
             0% {
-                transform: rotate(-5deg);
+                transform: rotate(-4deg);
             }
 
             50% {
-                transform: rotate(5deg);
+                transform: rotate(4deg);
             }
 
             100% {
-                transform: rotate(-5deg);
+                transform: rotate(-4deg);
             }
         }
 
-        @keyframes headerLight {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        @media (max-width: 1100px) {
+        /* 平板设备适配 */
+        @media (min-width: 768px) {
             .layout {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto 220px auto;
+                grid-template-columns: 1fr 200px 1fr;
+                grid-template-rows: auto;
+                gap: 30px;
             }
 
             .runway {
-                width: 100%;
-                height: 220px;
-                margin: 30px 0;
+                height: 100%;
+                min-height: 500px;
             }
 
             .runway::after {
-                transform: rotate(0deg);
+                font-size: 4rem;
+                writing-mode: vertical-rl;
+                /* 竖排文字 */
+                text-orientation: upright;
             }
 
-            .side {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
             .side {
                 grid-template-columns: 1fr;
-            }
-
-            .table-container {
-                width: 220px;
-                height: 220px;
+                gap: 30px;
             }
 
             h1 {
                 font-size: 2.5rem;
             }
 
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .table-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .table {
+                width: 180px;
+                height: 180px;
+            }
+
+            .table-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .seat {
+                width: 55px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* 桌面设备适配 */
+        @media (min-width: 1100px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .table-container {
+                width: 240px;
+                height: 240px;
+            }
+
+            .table {
+                width: 240px;
+                height: 240px;
+                border-width: 10px;
+            }
+
+            .table-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .seat {
+                width: 65px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+
+            .runway {
+                min-height: 600px;
+            }
+
+            .runway::after {
+                font-size: 5rem;
+            }
+
             .controls {
-                gap: 15px;
+                gap: 30px;
             }
 
             button {
-                padding: 12px 25px;
-                font-size: 1rem;
+                padding: 15px 30px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -420,7 +545,8 @@
 
     <div class="container">
         <header>
-            <h1>孙齐&amp;左雪萍婚宴席位表</h1>
+            <h1>孙齐&amp;左雪萍<br />婚宴席位表</h1>
+            <div class="subtitle">2025年11月09日 · 禧禾星辰梦境厅</div>
         </header>
 
         <div class="layout">
@@ -429,28 +555,177 @@
                 <div class="table-container">
                     <div class="table" id="table1">
                         <div class="table-number">1</div>
-                        <!-- 座位将通过JS动态添加 -->
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">高杰</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">赵洋</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">陈军</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">吴军</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">孙军</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">徐强</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">刘超</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">林霞</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">高勇</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">周杰</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">高杰
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            赵洋</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            陈军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            吴军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            孙军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            徐强</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            刘超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            林霞</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            高勇</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            周杰</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table2">
                         <div class="table-number">2</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">马秀英</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">罗静</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">李强</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">杨敏</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">罗艳</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">张秀兰</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">王磊</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">陈霞</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">黄杰</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">胡洋</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">马秀英
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            罗静</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            李强</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            杨敏</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            罗艳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            张秀兰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            王磊</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            陈霞</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            黄杰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            胡洋</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table3">
                         <div class="table-number">3</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">杨霞</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">杨军</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">郭艳</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">孙娜</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">高娟</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">朱娟</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">罗静</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">郭芳</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">高秀英</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">孙洋</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">杨霞
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            杨军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            郭艳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            孙娜</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            高娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            朱娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            罗静</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            郭芳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            高秀英</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            孙洋</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table4">
                         <div class="table-number">4</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">胡丽</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">何磊</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">徐丽</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">赵秀英</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">林芳</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">徐芳</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">林丽</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">吴军</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">孙秀兰</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">周芳</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">胡丽
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            何磊</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            徐丽</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            赵秀英</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            林芳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            徐芳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            林丽</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            吴军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            孙秀兰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            周芳</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table5">
                         <div class="table-number">5</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">黄涛</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">徐芳</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">黄秀英</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">孙娜</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">马艳</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">何娟</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">林杰</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">徐超</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">李明</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">赵伟</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">黄涛
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            徐芳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            黄秀英</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            孙娜</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            马艳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            何娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            林杰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            徐超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            李明</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            赵伟</div>
+                    </div>
                 </div>
             </div>
 
@@ -469,118 +744,208 @@
                 <div class="table-container">
                     <div class="table" id="table6">
                         <div class="table-number">6</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">赵明</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">何涛</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">胡伟</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">张磊</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">马伟</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">刘丽</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">林勇</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">吴军</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">郭伟</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">赵秀英</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">赵明
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            何涛</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            胡伟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            张磊</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            马伟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            刘丽</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            林勇</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            吴军</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            郭伟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            赵秀英</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table7">
                         <div class="table-number">7</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">高芳</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">何明</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">吴明</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">何超</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">高磊</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">李强</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">黄杰</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">李洋</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">徐芳</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">郭秀兰</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">高芳
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            何明</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            吴明</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            何超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            高磊</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            李强</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            黄杰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            李洋</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            徐芳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            郭秀兰</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table8">
                         <div class="table-number">8</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">林杰</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">朱明</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">刘杰</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">李娟</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">胡娟</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">孙丽</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">李涛</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">吴娟</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">胡勇</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">胡洋</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">林杰
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            朱明</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            刘杰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            李娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            胡娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            孙丽</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            李涛</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            吴娟</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            胡勇</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            胡洋</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table9">
                         <div class="table-number">9</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">周静</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">黄艳</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">高强</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">杨娜</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">张超</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">张磊</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">赵涛</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">李秀兰</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">李超</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">朱丽</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">周静
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            黄艳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            高强</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            杨娜</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            张超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            张磊</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            赵涛</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            李秀兰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            李超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            朱丽</div>
+                    </div>
                 </div>
                 <div class="table-container">
                     <div class="table" id="table10">
                         <div class="table-number">10</div>
-                    <div class="seat" data-occupied="true" style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">孙磊</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">王明</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">周秀英</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">黄超</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">何艳</div><div class="seat" data-occupied="true" style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">高超</div><div class="seat" data-occupied="true" style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">刘超</div><div class="seat" data-occupied="true" style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">罗秀兰</div><div class="seat" data-occupied="true" style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">杨静</div><div class="seat" data-occupied="true" style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">赵伟</div></div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 120px); top: calc(50% + 0px); transform: translate(-50%, -50%);">孙磊
+                        </div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            王明</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            周秀英</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% + 114.127px); transform: translate(-50%, -50%);">
+                            黄超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% + 70.5342px); transform: translate(-50%, -50%);">
+                            何艳</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 120px); top: calc(50% + 1.46958e-14px); transform: translate(-50%, -50%);">
+                            高超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            刘超</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% - 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            罗秀兰</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 37.082px); top: calc(50% - 114.127px); transform: translate(-50%, -50%);">
+                            杨静</div>
+                        <div class="seat" data-occupied="true"
+                            style="left: calc(50% + 97.082px); top: calc(50% - 70.5342px); transform: translate(-50%, -50%);">
+                            赵伟</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="controls">
-            <!-- <button id="generateBtn">随机生成宾客</button>
-            <button id="resetBtn">重置布局</button>
-            <button id="arrangeBtn">按字母排序</button> -->
-        </div>
-    <div class="decoration lantern" style="top: 71.1991%; left: 61.1558%; animation-delay: 0.434853s;"></div><div class="decoration lantern" style="top: 34.2612%; left: 41.7541%; animation-delay: 1.7664s;"></div><div class="decoration lantern" style="top: 76.2401%; left: 49.1452%; animation-delay: 0.223462s;"></div><div class="decoration lantern" style="top: 57.4724%; left: 92.7994%; animation-delay: 0.31569s;"></div><div class="decoration lantern" style="top: 72.3431%; left: 76.4108%; animation-delay: 1.67575s;"></div><div class="decoration lantern" style="top: 51.3799%; left: 7.24639%; animation-delay: 1.50108s;"></div><div class="decoration lantern" style="top: 83.6827%; left: 70.3489%; animation-delay: 0.58171s;"></div><div class="decoration lantern" style="top: 64.7382%; left: 19.6359%; animation-delay: 1.10511s;"></div></div>
+        <footer>
+            <p>婚宴时间：2025年11月09日 12:00 <br /> 地点：禧禾星辰梦境厅</p>
+            <p>祝各位来宾用餐愉快，幸福美满！</p>
+        </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tables = document.querySelectorAll('.table');
-            const generateBtn = document.getElementById('generateBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const arrangeBtn = document.getElementById('arrangeBtn');
+            const seats = document.querySelectorAll('.seat');
 
-            // 喜庆风格宾客名单
-            const firstNames = ['张', '王', '李', '刘', '陈', '杨', '赵', '黄', '周', '吴',
-                '徐', '孙', '胡', '朱', '高', '林', '何', '郭', '马', '罗'];
-            const lastNames = ['伟', '芳', '娜', '秀英', '敏', '静', '丽', '强', '磊', '军',
-                '洋', '艳', '勇', '杰', '娟', '涛', '明', '超', '秀兰', '霞'];
+            // 缩放功能
 
-            // 初始化座位
-            function initializeSeats() {
-                tables.forEach(table => {
-                    // 清除现有座位
-                    const seats = table.querySelectorAll('.seat');
-                    // seats.forEach(seat => seat.remove());
+            const layout = document.querySelector('.layout');
+            let currentScale = 1;
 
-                    // 创建10个座位
-                    for (let i = 0; i < 10; i++) {
-                        const seat = document.createElement('div');
-                        seat.className = 'seat';
-                        seat.textContent = `座位 ${i + 1}`;
-                        seat.dataset.occupied = 'false';
 
-                        // 计算座位位置（围绕圆桌）
-                        const angle = (i / 10) * Math.PI * 2;
-                        const radius = 120; // 距离圆桌中心的距离
-                        const x = Math.cos(angle) * radius;
-                        const y = Math.sin(angle) * radius;
 
-                        seat.style.left = `calc(50% + ${x}px)`;
-                        seat.style.top = `calc(50% + ${y}px)`;
-                        seat.style.transform = `translate(-50%, -50%)`;
-
-                        table.appendChild(seat);
-                    }
+            // 触摸屏优化：座位点击效果
+            seats.forEach(seat => {
+                seat.addEventListener('touchstart', function () {
+                    this.classList.add('seat-tap');
                 });
-            }
 
-            // 生成随机宾客姓名
-            function generateRandomName() {
-                const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-                const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-                return firstName + lastName;
-            }
-
-            // 随机分配宾客到座位
-            function assignGuests() {
-                tables.forEach(table => {
-                    const seats = table.querySelectorAll('.seat');
-                    seats.forEach(seat => {
-                        seat.textContent = generateRandomName();
-                        seat.dataset.occupied = 'true';
-                    });
+                seat.addEventListener('touchend', function () {
+                    this.classList.remove('seat-tap');
                 });
-            }
-
-            // 按字母顺序排列宾客
-            function arrangeAlphabetically() {
-                tables.forEach(table => {
-                    const seats = table.querySelectorAll('.seat');
-                    const names = Array.from(seats).map(seat => seat.textContent);
-                    names.sort();
-
-                    seats.forEach((seat, index) => {
-                        seat.textContent = names[index];
-                    });
-                });
-            }
-
-            // 事件监听
-            generateBtn.addEventListener('click', assignGuests);
-            resetBtn.addEventListener('click', initializeSeats);
-            arrangeBtn.addEventListener('click', arrangeAlphabetically);
-
-            // 初始化
-            // initializeSeats();
+            });
 
             // 添加更多灯笼装饰
             function addDecorations() {
@@ -602,8 +967,9 @@
             }
 
             addDecorations();
+
         });
     </script>
+</body>
 
-
-</body></html>
+</html>
