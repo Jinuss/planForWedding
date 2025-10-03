@@ -192,28 +192,13 @@
         }
 
         .runway {
-            background: linear-gradient(to bottom, #8b0000, #b22222, #8b0000);
             position: relative;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            border: 2px solid #ffd700;
             height: 180px;
         }
-
-        /* .runway::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 16px;
-            background: linear-gradient(90deg, #ffd700, #ffa500, #ffd700);
-            z-index: 2;
-        } */
 
         .runway::after {
             content: "新婚快乐 百年好合";
@@ -529,6 +514,46 @@
                 font-size: 1.1rem;
             }
         }
+
+        #particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            left:0;
+            top: 0;
+        }
+
+        .light-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffde59;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffde59;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.3;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -731,13 +756,7 @@
             </div>
 
             <div class="runway">
-                <div class="runway-lights">
-                    <div class="runway-light" style="animation-delay: 0s;"></div>
-                    <div class="runway-light" style="animation-delay: 0.2s;"></div>
-                    <div class="runway-light" style="animation-delay: 0.4s;"></div>
-                    <div class="runway-light" style="animation-delay: 0.6s;"></div>
-                    <div class="runway-light" style="animation-delay: 0.8s;"></div>
-                </div>
+
             </div>
 
             <div class="side right-side">
@@ -924,6 +943,7 @@
             <p>婚宴时间：2025年11月09日 12:00 <br /> 地点：禧禾星辰梦境厅</p>
             <p>祝各位来宾用餐愉快，幸福美满！</p>
         </footer>
+        <div id="particles"></div>
     </div>
 
     <script>
@@ -969,6 +989,31 @@
 
             addDecorations();
 
+            // 创建灯笼周围的光点粒子
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'light-particle';
+
+                // 随机位置
+                const left = Math.random() * 100;
+                const top = Math.random() * 100 + 100;
+
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 5;
+                const duration = 3 + Math.random() * 4;
+
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}px`;
+                particle.style.animation = `float ${duration}s linear ${delay}s infinite`;
+                particle.style.opacity = Math.random() * 0.8 + 0.2;
+                particle.style.width = `${Math.random() * 3 + 2}px`;
+                particle.style.height = particle.style.width;
+
+                particlesContainer.appendChild(particle);
+            }
         });
     </script>
 </body>
